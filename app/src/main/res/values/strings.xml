@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DrinkFinder</string>
+    <string name="ingredient_search_placeholder">Search ingredient</string>
 </resources>
