@@ -1,11 +1,11 @@
 package io.github.drinkfinder
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             R.layout.listview_item, ingredients
         )
 
-        listView= findViewById(R.id.listview_1)
+        listView = findViewById(R.id.listview_1)
         listView.adapter = adapter
 
         searchView = findViewById(R.id.ingredientSearch)
@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 return false
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
                 adapter.filter.filter(newText)
                 return false
