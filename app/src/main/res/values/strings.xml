@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">DrinkFinder</string>
     <string name="ingredient_search_placeholder">Search ingredient</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>
