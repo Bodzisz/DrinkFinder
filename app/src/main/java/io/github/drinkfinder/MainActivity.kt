@@ -27,6 +27,12 @@ class MainActivity : AppCompatActivity() {
         val ingredients =
             DrinkDatabase.getInstance(applicationContext).ingredientDao().getAllIngredientNames()
 
+        print(
+            DrinkDatabase.getInstance(applicationContext).drinkDao().getWithIngredientsByNames(
+                listOf("Mojito")
+            )
+        )
+
         // ingredient search
         val adapter = ArrayAdapter(
             this,

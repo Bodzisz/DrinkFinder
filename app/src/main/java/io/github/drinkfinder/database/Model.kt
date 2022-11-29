@@ -1,8 +1,6 @@
 package io.github.drinkfinder.database
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(tableName = "ingredients")
 data class Ingredient(
@@ -43,3 +41,19 @@ data class DrinksIngredients(
     val drinkId: Int,
     val ingredientId: Int
 )
+
+data class DrinksWithIngredients(
+    @Embedded val drink: Drink,
+    @Relation(
+        parentColumn = "id",
+        entity = Ingredient::class,
+        entityColumn = "id",
+        associateBy = Junction(
+            value = DrinksIngredients::class,
+            parentColumn = "drinkId",
+            entityColumn = "ingredientId"
+        )
+    )
+    val ingredients: List<Ingredient>
+)
+
