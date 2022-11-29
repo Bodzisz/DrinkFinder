@@ -11,32 +11,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import io.github.drinkfinder.database.DrinkDatabase
 
 class MainActivity : AppCompatActivity() {
-
-    /* TODO
-        Mock values used.
-        Change it to real data from db/api
-    */
-    var ingredients = arrayOf(
-        "Peach",
-        "Apple",
-        "Grapes",
-        "Orange",
-        "Mint",
-        "Banana",
-        "Vodka",
-        "Gin",
-        "Whiskey",
-        "Rum",
-        "Champagne",
-        "Coca-cola",
-        "Sprite",
-        "Tonic",
-        "Milk",
-        "Tomato",
-        "Lemon"
-    )
 
     lateinit var searchView: SearchView
     lateinit var listView: ListView
@@ -46,6 +23,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val ingredients =
+            DrinkDatabase.getInstance(applicationContext).ingredientDao().getAllIngredientNames()
 
         // ingredient search
         val adapter = ArrayAdapter(
@@ -83,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
         val navView: NavigationView = findViewById(R.id.nav_view)
         navView.setNavigationItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 /* TODO
                     Test Activity used
                     Change it to real activities when created
@@ -99,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item)) {
+        if (toggle.onOptionsItemSelected(item)) {
             return true
         }
 
@@ -107,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun switchScreens(activityClass: Class<*>?) {
-        val nextScreen: Intent = Intent(this, activityClass)
+        val nextScreen = Intent(this, activityClass)
         startActivity(nextScreen)
     }
 }

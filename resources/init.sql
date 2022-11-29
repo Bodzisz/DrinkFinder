@@ -2,14 +2,14 @@ CREATE TABLE IF NOT EXISTS ingredients (
   id INTEGER NOT NULL PRIMARY KEY,
   name TEXT NOT NULL UNIQUE,
   description TEXT,
-  isAlcoholic BOOLEAN NOT NULL CHECK(isAlcoholic IN (0, 1)),
+  isAlcoholic INTEGER NOT NULL CHECK(isAlcoholic IN (0, 1)),
   strABV INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS drinks (
   id INTEGER NOT NULL PRIMARY KEY,
   name TEXT NOT NULL UNIQUE,
-  isAlcoholic BOOLEAN NOT NULL CHECK(isAlcoholic IN (0, 1)),
+  isAlcoholic INTEGER NOT NULL CHECK(isAlcoholic IN (0, 1)),
   instructions TEXT
 );
 

@@ -23,7 +23,10 @@ class DatabaseTest {
         ).build()
 
         drinkDao = db.drinkDao()
-        drinkDao.insert(Drink(0, "Cosmopolitan"), Drink(0, "Mojito"))
+        drinkDao.insert(
+            Drink(0, "Cosmopolitan", 1, "Instruction"),
+            Drink(1, "Mojito", 1, "Instruction")
+        )
     }
 
     @After
