@@ -17,7 +17,7 @@ interface DrinkDao {
     fun getAllByNames(names: List<String>): List<Drink>
 
     @Query(
-        "SELECT * FROM drinks " +
+        "SELECT drinks.id, drinks.name, drinks.instructions, drinks.isAlcoholic FROM drinks " +
                 "JOIN drinks_ingredients ON drinks_ingredients.drinkId = drinks.id " +
                 "JOIN ingredients ON ingredients.id = drinks_ingredients.ingredientId " +
                 "WHERE ingredients.name IN (:ingredientsNames)"

@@ -3,10 +3,8 @@ package io.github.drinkfinder
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.AdapterView
-import android.widget.ListView
-import android.widget.SearchView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -38,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         initListView()
         initSearchView(ingredientsNames)
         initNavigationMenu()
+        initSearchButton()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -106,11 +105,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initSearchButton() {
+        val searchButton = findViewById<Button>(R.id.search_button)
+        searchButton.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, SelectedIngredientsDrinkListActivity::class.java)
+            intent.putCharSequenceArrayListExtra("selectedIngredientsNames", getSelectedIngredientsNames())
+            startActivity(intent)
+        })
+    }
+
     private fun fillIngredientsDataModel(ingredientsNames : List<String>) {
         if(ingredientsDataModel.isEmpty()) {
             for (ingredient in ingredientsNames) {
                 ingredientsDataModel.add(ListIngredientDataModel(ingredient, false))
             }
         }
+    }
+
+    private fun getSelectedIngredientsNames() : ArrayList<CharSequence?> {
+        val selected = ArrayList<CharSequence?>()
+        for(ingredient in ingredientsDataModel) {
+            if(ingredient.checked) {
+                selected.add(ingredient.name)
+            }
+        }
+        return selected
     }
 }
