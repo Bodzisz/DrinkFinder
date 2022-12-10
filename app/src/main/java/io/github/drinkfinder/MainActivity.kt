@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import io.github.drinkfinder.database.DrinkDatabase
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         val nextScreen = Intent(this, activityClass)
         startActivity(nextScreen)
     }
-    
+
     private fun initListView() {
         listView = findViewById(R.id.listview_1)
         listView.adapter = adapter
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
     }
-    
+
     private fun initSearchView(ingredientsNames : List<String>) {
         searchView = findViewById(R.id.ingredientSearch)
         searchView.clearFocus()
@@ -103,15 +104,33 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+        initSearchButton()
+    }
+
+    private fun intAllIngredientsSwitch(navView : NavigationView) {
+        val menuItem = navView.menu.findItem(R.id.item4)
+        val switchId = menuItem.actionView.findViewById(R.id.switch_id) as SwitchCompat
+        switchId.isChecked = false
+        switchId.setOnClickListener(View.OnClickListener {
+            Toast.makeText(
+                applicationContext,
+                if(switchId.isChecked) "isChecked!!" else "Not checked",
+                Toast.LENGTH_SHORT
+            ).show()
+        })
     }
 
     private fun initSearchButton() {
         val searchButton = findViewById<Button>(R.id.search_button)
-        searchButton.setOnClickListener(View.OnClickListener {
+        searchButton.setOnClickListener {
             val intent = Intent(this, SelectedIngredientsDrinkListActivity::class.java)
-            intent.putCharSequenceArrayListExtra("selectedIngredientsNames", getSelectedIngredientsNames())
+            intent.putCharSequenceArrayListExtra(
+                "selectedIngredientsNames",
+                getSelectedIngredientsNames()
+            )
             startActivity(intent)
-        })
+        }
     }
 
     private fun fillIngredientsDataModel(ingredientsNames : List<String>) {
