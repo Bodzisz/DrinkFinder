@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-    }
+    }.
 
     private fun initSearchButton() {
         val searchButton = findViewById<Button>(R.id.search_button)
