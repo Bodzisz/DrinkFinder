@@ -16,7 +16,7 @@ import io.github.drinkfinder.ingredientList.ListIngredientDataModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val ingredientsDataModel : ArrayList<ListIngredientDataModel> = ArrayList()
+    private val ingredientsDataModel: ArrayList<ListIngredientDataModel> = ArrayList()
 
     lateinit var searchView: SearchView
     lateinit var listView: ListView
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val ingredientsNames : List<String> =
+        val ingredientsNames: List<String> =
             DrinkDatabase.getInstance(applicationContext).ingredientDao().getAllIngredientNames()
 
         fillIngredientsDataModel(ingredientsNames)
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initSearchView(ingredientsNames : List<String>) {
+    private fun initSearchView(ingredientsNames: List<String>) {
         searchView = findViewById(R.id.ingredientSearch)
         searchView.clearFocus()
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initNavigationMenu() {
-        drawerLayout = findViewById(R.id.drawerLayout)
+        drawerLayout = findViewById(R.id.main_layout)
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -108,14 +108,14 @@ class MainActivity : AppCompatActivity() {
         initSearchButton()
     }
 
-    private fun intAllIngredientsSwitch(navView : NavigationView) {
+    private fun intAllIngredientsSwitch(navView: NavigationView) {
         val menuItem = navView.menu.findItem(R.id.item4)
         val switchId = menuItem.actionView.findViewById(R.id.switch_id) as SwitchCompat
         switchId.isChecked = false
         switchId.setOnClickListener(View.OnClickListener {
             Toast.makeText(
                 applicationContext,
-                if(switchId.isChecked) "isChecked!!" else "Not checked",
+                if (switchId.isChecked) "isChecked!!" else "Not checked",
                 Toast.LENGTH_SHORT
             ).show()
         })
@@ -133,18 +133,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun fillIngredientsDataModel(ingredientsNames : List<String>) {
-        if(ingredientsDataModel.isEmpty()) {
+    private fun fillIngredientsDataModel(ingredientsNames: List<String>) {
+        if (ingredientsDataModel.isEmpty()) {
             for (ingredient in ingredientsNames) {
                 ingredientsDataModel.add(ListIngredientDataModel(ingredient, false))
             }
         }
     }
 
-    private fun getSelectedIngredientsNames() : ArrayList<CharSequence?> {
+    private fun getSelectedIngredientsNames(): ArrayList<CharSequence?> {
         val selected = ArrayList<CharSequence?>()
-        for(ingredient in ingredientsDataModel) {
-            if(ingredient.checked) {
+        for (ingredient in ingredientsDataModel) {
+            if (ingredient.checked) {
                 selected.add(ingredient.name)
             }
         }
