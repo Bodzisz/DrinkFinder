@@ -11,12 +11,19 @@ import io.github.drinkfinder.database.Ingredient
 
 class DrinkViewActivity : AppCompatActivity() {
 
+    private lateinit var isAlcoholicText: TextView
+    private lateinit var isAlcoholicImage: ImageView
+    private lateinit var favouriteButton: ImageButton
     private lateinit var drinkImage: ImageView
     private lateinit var drinkName: TextView
     private lateinit var drinkIngredients: TextView
     private lateinit var drinkInstructions: TextView
-    private lateinit var favouriteButton: ImageButton
     private var isFavourite = false
+
+    companion object {
+        const val ALCOHOLIC_TEXT = "alcoholic"
+        const val NON_ALCOHOLIC_TEXT = "non-$ALCOHOLIC_TEXT"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +32,19 @@ class DrinkViewActivity : AppCompatActivity() {
         val drinkDao = DrinkDatabase.getInstance(applicationContext).drinkDao()
         val selectedDrink =
             drinkDao.getWithIngredientsByName(intent.getStringExtra("selectedDrink"))
+
+        isAlcoholicText = findViewById(R.id.is_alcoholic_text)
+        isAlcoholicImage = findViewById(R.id.is_alcoholic_image)
+
+        if (selectedDrink.drink.isAlcoholic == 0) {
+            isAlcoholicText.text = NON_ALCOHOLIC_TEXT
+            isAlcoholicText.setTextColor(resources.getColor(R.color.green, theme))
+            isAlcoholicImage.setImageResource(R.drawable.drink_icon_non_alcoholic)
+        } else {
+            isAlcoholicText.text = ALCOHOLIC_TEXT
+            isAlcoholicText.setTextColor(resources.getColor(R.color.red, theme))
+            isAlcoholicImage.setImageResource(R.drawable.drink_icon_alcoholic)
+        }
 
         drinkImage = findViewById(R.id.drink_image)
         // if drink image not found set the default one
@@ -38,6 +58,7 @@ class DrinkViewActivity : AppCompatActivity() {
 
         drinkInstructions = findViewById(R.id.drink_instructions)
         drinkInstructions.text = adjustInstruction(selectedDrink.drink.instructions)
+
 
         favouriteButton = findViewById(R.id.favourite_button)
 

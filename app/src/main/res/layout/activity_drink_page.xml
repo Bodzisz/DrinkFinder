@@ -13,15 +13,24 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
 
-        <ImageView
-            android:id="@+id/drink_image"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+        <TextView
+            android:id="@+id/is_alcoholic_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/divider1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:contentDescription="Drink image"
-            tools:srcCompat="@tools:sample/avatars[3]" />
+            android:layout_marginTop="20dp"
+            android:text="is alcoholic?"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/is_alcoholic_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/divider1"
+            android:layout_toRightOf="@id/is_alcoholic_text"
+            app:srcCompat="@drawable/drink_icon" />
 
         <ImageButton
             android:id="@+id/favourite_button"
@@ -32,9 +41,19 @@
             android:layout_marginTop="10dp"
             android:background="@color/white"
             android:contentDescription="@string/add_delete_drink_from_favourites"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
             app:srcCompat="@android:drawable/star_big_off" />
+
+        <ImageView
+            android:id="@+id/drink_image"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_below="@id/is_alcoholic_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:contentDescription="Drink image"
+            tools:srcCompat="@tools:sample/avatars[3]" />
 
         <TextView
             android:id="@+id/drink_name"
