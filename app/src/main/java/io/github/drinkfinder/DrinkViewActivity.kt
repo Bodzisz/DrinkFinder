@@ -11,13 +11,6 @@ import io.github.drinkfinder.database.Ingredient
 
 class DrinkViewActivity : AppCompatActivity() {
 
-    private lateinit var isAlcoholicText: TextView
-    private lateinit var isAlcoholicImage: ImageView
-    private lateinit var favouriteButton: ImageButton
-    private lateinit var drinkImage: ImageView
-    private lateinit var drinkName: TextView
-    private lateinit var drinkIngredients: TextView
-    private lateinit var drinkInstructions: TextView
     private var isFavourite = false
 
     companion object {
@@ -33,8 +26,8 @@ class DrinkViewActivity : AppCompatActivity() {
         val selectedDrink =
             drinkDao.getWithIngredientsByName(intent.getStringExtra("selectedDrink"))
 
-        isAlcoholicText = findViewById(R.id.is_alcoholic_text)
-        isAlcoholicImage = findViewById(R.id.is_alcoholic_image)
+        val isAlcoholicText = findViewById<TextView>(R.id.is_alcoholic_text)
+        val isAlcoholicImage = findViewById<ImageView>(R.id.is_alcoholic_image)
 
         if (selectedDrink.drink.isAlcoholic == 0) {
             isAlcoholicText.text = NON_ALCOHOLIC_TEXT
@@ -46,21 +39,15 @@ class DrinkViewActivity : AppCompatActivity() {
             isAlcoholicImage.setImageResource(R.drawable.drink_icon_alcoholic)
         }
 
-        drinkImage = findViewById(R.id.drink_image)
         // if drink image not found set the default one
-        drinkImage.setImageResource(R.drawable.default_drink)
+        findViewById<ImageView>(R.id.drink_image).setImageResource(R.drawable.default_drink)
+        findViewById<TextView>(R.id.drink_name).text = selectedDrink.drink.name
+        findViewById<TextView>(R.id.drink_ingredients).text =
+            listAllIngredients(selectedDrink.ingredients)
+        findViewById<TextView>(R.id.drink_instructions).text =
+            adjustInstruction(selectedDrink.drink.instructions)
 
-        drinkName = findViewById(R.id.drink_name)
-        drinkName.text = selectedDrink.drink.name
-
-        drinkIngredients = findViewById(R.id.drink_ingredients)
-        drinkIngredients.text = listAllIngredients(selectedDrink.ingredients)
-
-        drinkInstructions = findViewById(R.id.drink_instructions)
-        drinkInstructions.text = adjustInstruction(selectedDrink.drink.instructions)
-
-
-        favouriteButton = findViewById(R.id.favourite_button)
+        val favouriteButton = findViewById<ImageButton>(R.id.favourite_button)
 
         if (drinkDao.isFavourite(selectedDrink.drink.id) == 1) {
             favouriteButton.setImageResource(android.R.drawable.star_big_on)
