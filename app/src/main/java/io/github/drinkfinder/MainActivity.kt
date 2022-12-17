@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         initSearchView(ingredientsNames)
         initNavigationMenu()
         initSearchButton()
+        initClearButton()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -129,6 +130,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initClearButton() {
+        val searchButton = findViewById<Button>(R.id.clear_button)
+        searchButton.setOnClickListener {
+            ingredientsDataModel.forEach(this::clearIngredientState)
+            adapter.notifyDataSetChanged()
+        }
+    }
+
     private fun fillIngredientsDataModel(ingredientsNames: List<String>) {
         if (ingredientsDataModel.isEmpty()) {
             for (ingredient in ingredientsNames) {
@@ -145,5 +154,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return selected
+    }
+
+    private fun clearIngredientState(listIngredientDataModel: ListIngredientDataModel) {
+        listIngredientDataModel.checked = false
     }
 }
