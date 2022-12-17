@@ -94,13 +94,9 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                /* TODO
-                    Test Activity used
-                    Change it to real activities when created
-                */
-                R.id.item1 -> switchScreens(TestActivity::class.java)
-                R.id.item2 -> switchScreens(TestActivity::class.java)
-                R.id.item3 -> switchScreens(TestActivity::class.java)
+                R.id.select_by_ingredients -> switchScreens(MainActivity::class.java)
+                R.id.select_by_name -> switchScreens(SelectedByNameDrinkListActivity::class.java)
+                R.id.favourite_drinks -> switchScreens(FavouriteDrinkListActivity::class.java)
             }
             true
         }
