@@ -6,4 +6,6 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="search">Search</string>
     <string name="ingredients_switch">  Drinks contain all ingredients  </string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
 </resources>
