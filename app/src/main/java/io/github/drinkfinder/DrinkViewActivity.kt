@@ -1,10 +1,12 @@
 package io.github.drinkfinder
 
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import io.github.drinkfinder.database.DrinkDatabase
+import io.github.drinkfinder.database.Favourite
 import io.github.drinkfinder.database.Ingredient
 
 class DrinkViewActivity : AppCompatActivity() {
@@ -13,15 +15,16 @@ class DrinkViewActivity : AppCompatActivity() {
     private lateinit var drinkName: TextView
     private lateinit var drinkIngredients: TextView
     private lateinit var drinkInstructions: TextView
+    private lateinit var favouriteButton: ImageButton
+    private var isFavourite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drink_page)
 
+        val drinkDao = DrinkDatabase.getInstance(applicationContext).drinkDao()
         val selectedDrink =
-            DrinkDatabase.getInstance(applicationContext).drinkDao().getWithIngredientsByName(
-                intent.getStringExtra("selectedDrink")
-            )
+            drinkDao.getWithIngredientsByName(intent.getStringExtra("selectedDrink"))
 
         drinkImage = findViewById(R.id.drink_image)
         // if drink image not found set the default one
@@ -35,6 +38,25 @@ class DrinkViewActivity : AppCompatActivity() {
 
         drinkInstructions = findViewById(R.id.drink_instructions)
         drinkInstructions.text = adjustInstruction(selectedDrink.drink.instructions)
+
+        favouriteButton = findViewById(R.id.favourite_button)
+
+        if (drinkDao.isFavourite(selectedDrink.drink.id) == 1) {
+            favouriteButton.setImageResource(android.R.drawable.star_big_on)
+            isFavourite = true
+        }
+
+        favouriteButton.setOnClickListener {
+            isFavourite = if (isFavourite) {
+                drinkDao.deleteFromFavourites(Favourite(selectedDrink.drink.id))
+                favouriteButton.setImageResource(android.R.drawable.star_big_off)
+                false
+            } else {
+                drinkDao.insertFavourites(Favourite(selectedDrink.drink.id))
+                favouriteButton.setImageResource(android.R.drawable.star_big_on)
+                true
+            }
+        }
     }
 
     private fun listAllIngredients(ingredients: List<Ingredient>): String {

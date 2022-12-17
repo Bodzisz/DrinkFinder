@@ -8,4 +8,5 @@
     <string name="ingredients_switch">  Drinks contain all ingredients  </string>
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
+    <string name="add_delete_drink_from_favourites">Add/Delete drink from favourites</string>
 </resources>

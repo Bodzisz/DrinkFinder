@@ -42,7 +42,7 @@ data class DrinksIngredients(
     val ingredientId: Int
 )
 
-data class DrinksWithIngredients(
+data class DrinkWithIngredients(
     @Embedded val drink: Drink,
     @Relation(
         parentColumn = "id",
@@ -55,5 +55,20 @@ data class DrinksWithIngredients(
         )
     )
     val ingredients: List<Ingredient>
+)
+
+@Entity(
+    tableName = "favourites",
+    foreignKeys = [
+        ForeignKey(
+            entity = Drink::class,
+            parentColumns = ["id"],
+            childColumns = ["drinkId"],
+            onDelete = ForeignKey.NO_ACTION
+        )
+    ]
+)
+data class Favourite(
+    @PrimaryKey(autoGenerate = false) val drinkId: Int,
 )
 
