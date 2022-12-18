@@ -3,10 +3,9 @@ package io.github.drinkfinder
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import io.github.drinkfinder.database.DrinkDatabase
 
-class SelectedByNameDrinkListActivity : AppCompatActivity() {
+class SelectedByNameDrinkListActivity : DrinkFinderSecondaryActivity() {
 
     private lateinit var searchView: SearchView
     private lateinit var listView: ListView
@@ -15,6 +14,8 @@ class SelectedByNameDrinkListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_by_name)
+
+        initToolbar()
 
         val drinkNames: List<String> =
             DrinkDatabase.getInstance(applicationContext).drinkDao().getAllNames()

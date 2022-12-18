@@ -29,11 +29,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initToolbar()
+
         val ingredientsNames: List<String> =
             DrinkDatabase.getInstance(applicationContext).ingredientDao().getAllIngredientNames()
 
         fillIngredientsDataModel(ingredientsNames)
         adapter = IngredientListAdapter(ingredientsDataModel, applicationContext)
+
         initListView()
         initSearchView(ingredientsNames)
         initNavigationMenu()
@@ -51,6 +54,11 @@ class MainActivity : AppCompatActivity() {
     private fun switchScreens(activityClass: Class<*>?) {
         val nextScreen = Intent(this, activityClass)
         startActivity(nextScreen)
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(findViewById(R.id.myToolbar))
+        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     private fun initListView() {

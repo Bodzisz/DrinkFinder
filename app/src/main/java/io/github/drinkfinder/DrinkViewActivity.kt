@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import io.github.drinkfinder.database.DrinkDatabase
 import io.github.drinkfinder.database.Favourite
 import io.github.drinkfinder.database.Ingredient
 
-class DrinkViewActivity : AppCompatActivity() {
+class DrinkViewActivity : DrinkFinderSecondaryActivity() {
 
     private var isFavourite = false
 
@@ -21,6 +20,8 @@ class DrinkViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drink_page)
+
+        initToolbar()
 
         val drinkDao = DrinkDatabase.getInstance(applicationContext).drinkDao()
         val selectedDrink =

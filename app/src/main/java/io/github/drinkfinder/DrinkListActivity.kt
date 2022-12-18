@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import androidx.appcompat.app.AppCompatActivity
 
-abstract class DrinkListActivity : AppCompatActivity() {
+abstract class DrinkListActivity : DrinkFinderSecondaryActivity() {
 
     lateinit var listView: ListView
 
@@ -15,6 +14,7 @@ abstract class DrinkListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drinks_list)
 
+        initToolbar()
         initDrinksList()
 
         listView = findViewById(R.id.drinks_list_view)
