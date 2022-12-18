@@ -3,10 +3,9 @@ package io.github.drinkfinder
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import io.github.drinkfinder.database.DrinkDatabase
 
-class SelectedByNameDrinkListActivity : AppCompatActivity() {
+class SelectedByNameDrinkListActivity : DrinkFinderSecondaryActivity() {
 
     private lateinit var searchView: SearchView
     private lateinit var listView: ListView
@@ -36,18 +35,6 @@ class SelectedByNameDrinkListActivity : AppCompatActivity() {
                 )
                 startActivity(intent)
             }
-    }
-
-    private fun initToolbar() {
-        setSupportActionBar(findViewById(R.id.myToolbar))
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true;
     }
 
     private fun initSearchView(drinkNames: List<String>) {

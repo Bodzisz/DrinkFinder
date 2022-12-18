@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import androidx.appcompat.app.AppCompatActivity
 
-abstract class DrinkListActivity : AppCompatActivity() {
+abstract class DrinkListActivity : DrinkFinderSecondaryActivity() {
 
     lateinit var listView: ListView
 
@@ -31,19 +30,6 @@ abstract class DrinkListActivity : AppCompatActivity() {
                 startActivity(intent)
             }
     }
-
-    private fun initToolbar() {
-        setSupportActionBar(findViewById(R.id.myToolbar))
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true;
-    }
-
 
     abstract fun initDrinksList()
     abstract fun getDrinksNames(): List<String>
