@@ -16,6 +16,8 @@ class SelectedByNameDrinkListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_by_name)
 
+        initToolbar()
+
         val drinkNames: List<String> =
             DrinkDatabase.getInstance(applicationContext).drinkDao().getAllNames()
 
@@ -34,6 +36,18 @@ class SelectedByNameDrinkListActivity : AppCompatActivity() {
                 )
                 startActivity(intent)
             }
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(findViewById(R.id.myToolbar))
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true;
     }
 
     private fun initSearchView(drinkNames: List<String>) {

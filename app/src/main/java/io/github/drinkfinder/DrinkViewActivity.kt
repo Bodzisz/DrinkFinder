@@ -22,6 +22,8 @@ class DrinkViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drink_page)
 
+        initToolbar()
+
         val drinkDao = DrinkDatabase.getInstance(applicationContext).drinkDao()
         val selectedDrink =
             drinkDao.getWithIngredientsByName(intent.getStringExtra("selectedDrink"))
@@ -71,6 +73,18 @@ class DrinkViewActivity : AppCompatActivity() {
                 true
             }
         }
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(findViewById(R.id.myToolbar))
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true;
     }
 
     private fun listAllIngredients(ingredients: List<Ingredient>): String {

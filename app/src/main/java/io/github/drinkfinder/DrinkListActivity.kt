@@ -15,6 +15,7 @@ abstract class DrinkListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drinks_list)
 
+        initToolbar()
         initDrinksList()
 
         listView = findViewById(R.id.drinks_list_view)
@@ -30,6 +31,19 @@ abstract class DrinkListActivity : AppCompatActivity() {
                 startActivity(intent)
             }
     }
+
+    private fun initToolbar() {
+        setSupportActionBar(findViewById(R.id.myToolbar))
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true;
+    }
+
 
     abstract fun initDrinksList()
     abstract fun getDrinksNames(): List<String>
