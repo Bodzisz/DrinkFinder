@@ -27,6 +27,10 @@ interface DrinkDao {
     @Query("SELECT * FROM drinks WHERE drinks.name = :drinkName")
     fun getWithIngredientsByName(drinkName: String?): DrinkWithIngredients
 
+    @Transaction
+    @Query("SELECT * FROM drinks")
+    fun getAllWithIngredients(): List<DrinkWithIngredients>
+
     @Query("SELECT COUNT(drinkId) from favourites WHERE drinkId = :id")
     fun isFavourite(id: Int): Int
 
