@@ -21,7 +21,7 @@ abstract class DrinkListActivity : AppCompatActivity() {
         listView.adapter = ArrayAdapter(this, R.layout.listview_item, getDrinksNames())
 
         listView.onItemClickListener =
-            AdapterView.OnItemClickListener { parent, view, position, id ->
+            AdapterView.OnItemClickListener { _, _, position, _ ->
                 val intent = Intent(this, DrinkViewActivity::class.java)
                 intent.putExtra(
                     "selectedDrink",

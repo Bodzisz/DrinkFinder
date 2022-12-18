@@ -41,11 +41,17 @@ class DrinkViewActivity : AppCompatActivity() {
 
         // if drink image not found set the default one
         findViewById<ImageView>(R.id.drink_image).setImageResource(R.drawable.default_drink)
-        findViewById<TextView>(R.id.drink_name).text = selectedDrink.drink.name
         findViewById<TextView>(R.id.drink_ingredients).text =
             listAllIngredients(selectedDrink.ingredients)
         findViewById<TextView>(R.id.drink_instructions).text =
             adjustInstruction(selectedDrink.drink.instructions)
+
+        val drinkName = findViewById<TextView>(R.id.drink_name)
+        drinkName.text = selectedDrink.drink.name
+
+        if (selectedDrink.drink.name.length > 25) {
+            drinkName.textSize = 22.0f
+        }
 
         val favouriteButton = findViewById<ImageButton>(R.id.favourite_button)
 
