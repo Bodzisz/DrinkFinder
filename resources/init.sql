@@ -13,10 +13,10 @@ CREATE TABLE ingredients (
 );
 
 CREATE TABLE drinks_ingredients (
-  drinks_ingredients_id INTEGER PRIMARY KEY,
+  drinksIngredientsId INTEGER PRIMARY KEY NOT NULL,
   drinkId INTEGER NOT NULL,
   ingredientId INTEGER NOT NULL,
-  ingredient_measure TEXT NOT NULL,
+  ingredientMeasure TEXT NOT NULL,
   FOREIGN KEY (drinkId) REFERENCES drinks(id),
   FOREIGN KEY (ingredientId) REFERENCES ingredients(id)
 );
