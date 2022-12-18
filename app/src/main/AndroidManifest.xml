@@ -40,6 +40,20 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".FavouriteDrinkListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SelectedByNameDrinkListActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".DrinkViewActivity"
             android:exported="false">
             <meta-data

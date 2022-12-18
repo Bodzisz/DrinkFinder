@@ -14,9 +14,16 @@ CREATE TABLE ingredients (
 
 CREATE TABLE drinks_ingredients (
   drinks_ingredients_id INTEGER PRIMARY KEY,
-  drink_id INTEGER NOT NULL,
-  ingredient_id INTEGER NOT NULL,
+  drinkId INTEGER NOT NULL,
+  ingredientId INTEGER NOT NULL,
   ingredient_measure TEXT NOT NULL,
-  FOREIGN KEY (drink_id) REFERENCES drinks(id),
-  FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
+  FOREIGN KEY (drinkId) REFERENCES drinks(id),
+  FOREIGN KEY (ingredientId) REFERENCES ingredients(id)
 );
+
+CREATE TABLE favourites (
+	drinkId INTEGER NOT NULL PRIMARY KEY,
+	FOREIGN KEY (drinkId) REFERENCES drinks(id)
+);
+
+

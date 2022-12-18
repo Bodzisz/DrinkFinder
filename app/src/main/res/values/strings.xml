@@ -5,7 +5,12 @@
     <string name="close">Close</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="search">Search</string>
-    <string name="ingredients_switch">  Drinks contain all ingredients  </string>
+    <string name="ingredients_switch">Drinks contain all ingredients</string>
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
+    <string name="add_delete_drink_from_favourites">Add/Delete drink from favourites</string>
+    <string name="find_drink_by_ingredients">Find drink by ingredients</string>
+    <string name="find_drink_by_name">Find drink by name</string>
+    <string name="favourite_drinks">Favourite drinks</string>
+    <string name="clear">Clear</string>
 </resources>

@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         initSearchView(ingredientsNames)
         initNavigationMenu()
         initSearchButton()
+        initClearButton()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -94,13 +95,10 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                /* TODO
-                    Test Activity used
-                    Change it to real activities when created
-                */
-                R.id.item1 -> switchScreens(TestActivity::class.java)
-                R.id.item2 -> switchScreens(TestActivity::class.java)
-                R.id.item3 -> switchScreens(TestActivity::class.java)
+                R.id.select_by_ingredients ->
+                    if (!this::class.simpleName.equals("MainActivity")) switchScreens(MainActivity::class.java)
+                R.id.select_by_name -> switchScreens(SelectedByNameDrinkListActivity::class.java)
+                R.id.favourite_drinks -> switchScreens(FavouriteDrinkListActivity::class.java)
             }
             true
         }
@@ -133,6 +131,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initClearButton() {
+        val searchButton = findViewById<Button>(R.id.clear_button)
+        searchButton.setOnClickListener {
+            ingredientsDataModel.forEach(this::clearIngredientState)
+            adapter.notifyDataSetChanged()
+        }
+    }
+
     private fun fillIngredientsDataModel(ingredientsNames: List<String>) {
         if (ingredientsDataModel.isEmpty()) {
             for (ingredient in ingredientsNames) {
@@ -149,5 +155,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return selected
+    }
+
+    private fun clearIngredientState(listIngredientDataModel: ListIngredientDataModel) {
+        listIngredientDataModel.checked = false
     }
 }

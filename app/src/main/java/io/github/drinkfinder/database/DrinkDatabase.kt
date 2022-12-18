@@ -5,7 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Drink::class, Ingredient::class, DrinksIngredients::class], version = 1)
+@Database(
+    entities = [Drink::class, Ingredient::class, DrinksIngredients::class, Favourite::class],
+    version = 1
+)
 abstract class DrinkDatabase : RoomDatabase() {
     abstract fun drinkDao(): DrinkDao
     abstract fun ingredientDao(): IngredientDao
@@ -22,7 +25,7 @@ abstract class DrinkDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context): DrinkDatabase {
             return Room.databaseBuilder(context, DrinkDatabase::class.java, "Drink_database.db")
-                .allowMainThreadQueries() // TODO Remove later after tests
+                .allowMainThreadQueries()
                 .createFromAsset("database.db")
                 .build()
         }

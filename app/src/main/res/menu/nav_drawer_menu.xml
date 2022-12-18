@@ -3,23 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item1"
-        android:title="Item 1" />
+        android:id="@+id/select_by_ingredients"
+        android:title="@string/find_drink_by_ingredients" />
 
     <item
-        android:id="@+id/item2"
-        android:title="Item 2" />
+        android:id="@+id/select_by_name"
+        android:title="@string/find_drink_by_name" />
 
     <item
-        android:id="@+id/item3"
-        android:title="Item 3" />
+        android:id="@+id/favourite_drinks"
+        android:title="@string/favourite_drinks" />
 
     <item
         android:id="@+id/item4"
+        android:title="@string/ingredients_switch"
         app:actionLayout="@layout/switch_menu"
-        app:showAsAction="always"
-        android:title="@string/ingredients_switch" />
-
-
-
+        app:showAsAction="always" />
 </menu>
