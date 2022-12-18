@@ -111,19 +111,18 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        initSearchButton()
+        initAllIngredientsSwitch(navView)
     }
 
-    private fun intAllIngredientsSwitch(navView: NavigationView) {
+    private fun initAllIngredientsSwitch(navView: NavigationView) {
         val menuItem = navView.menu.findItem(R.id.item4)
         val switchId = menuItem.actionView.findViewById(R.id.switch_id) as SwitchCompat
-        switchId.isChecked = false
+        val preferences = getSharedPreferences("Preferences", MODE_PRIVATE)
+        switchId.isChecked = preferences.getBoolean("allIngredients", false)
         switchId.setOnClickListener(View.OnClickListener {
-            Toast.makeText(
-                applicationContext,
-                if (switchId.isChecked) "isChecked!!" else "Not checked",
-                Toast.LENGTH_SHORT
-            ).show()
+            val editor = preferences.edit()
+            editor.putBoolean("allIngredients", switchId.isChecked)
+            editor.apply()
         })
     }
 
