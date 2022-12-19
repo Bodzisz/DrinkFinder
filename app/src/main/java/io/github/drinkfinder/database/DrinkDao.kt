@@ -25,7 +25,7 @@ interface DrinkDao {
 
     @Transaction
     @Query("SELECT * FROM drinks WHERE drinks.name = :drinkName")
-    fun getWithIngredientsByName(drinkName: String?): DrinkWithIngredients
+    fun getWithIngredientsAndQuantitiesByName(drinkName: String?): DrinkWithIngredientsAndQuantities
 
     @Transaction
     @Query("SELECT * FROM drinks")

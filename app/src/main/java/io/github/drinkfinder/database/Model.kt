@@ -43,6 +43,18 @@ data class DrinksIngredients(
     val ingredientMeasure: String
 )
 
+data class IngredientWithQuantity(
+    @Embedded val drinksIngredient: DrinksIngredients,
+    @Relation(parentColumn = "ingredientId", entity = Ingredient::class, entityColumn = "id")
+    val ingredient: Ingredient
+)
+
+data class DrinkWithIngredientsAndQuantities(
+    @Embedded val drink: Drink,
+    @Relation(parentColumn = "id", entity = DrinksIngredients::class, entityColumn = "drinkId")
+    val ingredientsWithQuantity: List<IngredientWithQuantity>
+)
+
 data class DrinkWithIngredients(
     @Embedded val drink: Drink,
     @Relation(
