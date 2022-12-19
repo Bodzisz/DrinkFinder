@@ -7,7 +7,7 @@ import android.widget.TextView
 import com.google.android.material.imageview.ShapeableImageView
 import io.github.drinkfinder.database.DrinkDatabase
 import io.github.drinkfinder.database.Favourite
-import io.github.drinkfinder.database.Ingredient
+import io.github.drinkfinder.database.IngredientWithQuantity
 import java.util.*
 
 class DrinkViewActivity : DrinkFinderSecondaryActivity() {
@@ -27,7 +27,7 @@ class DrinkViewActivity : DrinkFinderSecondaryActivity() {
 
         val drinkDao = DrinkDatabase.getInstance(applicationContext).drinkDao()
         val selectedDrink =
-            drinkDao.getWithIngredientsByName(intent.getStringExtra("selectedDrink"))
+            drinkDao.getWithIngredientsAndQuantitiesByName(intent.getStringExtra("selectedDrink"))
 
         val isAlcoholicText = findViewById<TextView>(R.id.is_alcoholic_text)
         val isAlcoholicImage = findViewById<ImageView>(R.id.is_alcoholic_image)
@@ -48,9 +48,13 @@ class DrinkViewActivity : DrinkFinderSecondaryActivity() {
             packageName
         )
 
-        findViewById<ShapeableImageView>(R.id.drink_image).setImageResource(if (drinkImageId != 0) drinkImageId else R.drawable.default_drink)
+        findViewById<ShapeableImageView>(R.id.drink_image).setImageResource(
+            if (drinkImageId != 0) drinkImageId else R.drawable.default_drink
+        )
+
         findViewById<TextView>(R.id.drink_ingredients).text =
-            listAllIngredients(selectedDrink.ingredients)
+            listAllIngredients(selectedDrink.ingredientsWithQuantity)
+        
         findViewById<TextView>(R.id.drink_instructions).text =
             adjustInstruction(selectedDrink.drink.instructions)
 
@@ -89,11 +93,14 @@ class DrinkViewActivity : DrinkFinderSecondaryActivity() {
         return imageName.replace(Regex("[ #-/]"), "_").lowercase(Locale.ROOT)
     }
 
-    private fun listAllIngredients(ingredients: List<Ingredient>): String {
+    private fun listAllIngredients(ingredients: List<IngredientWithQuantity>): String {
         var result = ""
 
         for (i in ingredients) {
-            result = concatNextItem(result, i.name)
+            result = concatNextItem(
+                result,
+                "${i.drinksIngredient.ingredientMeasure} ${i.ingredient.name}"
+            )
         }
 
         return result
