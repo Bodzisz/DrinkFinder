@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <include
-        layout="@layout/toolbar"
-        android:id="@+id/toolbarInclude"/>
+        android:id="@+id/toolbarInclude"
+        layout="@layout/toolbar" />
 
     <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/scroll_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:fillViewport="true"
         android:layout_below="@+id/toolbarInclude"
+        android:fillViewport="true"
         tools:context=".MainActivity">
 
         <RelativeLayout
@@ -27,8 +26,9 @@ android:layout_height="match_parent">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/divider1"
-                android:layout_centerHorizontal="true"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/is_alcoholic_image"
                 android:text="is alcoholic?"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -39,7 +39,8 @@ android:layout_height="match_parent">
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_below="@id/divider1"
-                android:layout_toRightOf="@id/is_alcoholic_text"
+                android:layout_alignStart="@id/divider1"
+                android:layout_marginTop="1dp"
                 app:srcCompat="@drawable/drink_icon" />
 
             <ImageButton
@@ -55,15 +56,17 @@ android:layout_height="match_parent">
                 android:scaleY="1.5"
                 app:srcCompat="@android:drawable/star_big_off" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/drink_image"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
+                android:layout_width="270dp"
+                android:layout_height="270dp"
                 android:layout_below="@id/is_alcoholic_image"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:contentDescription="Drink image"
-                tools:srcCompat="@tools:sample/avatars[3]" />
+                android:src="@drawable/_0_50"
+                app:strokeColor="@color/black"
+                app:strokeWidth="5dp" />
 
             <TextView
                 android:id="@+id/drink_name"

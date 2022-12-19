@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.android.material.imageview.ShapeableImageView
 import io.github.drinkfinder.database.DrinkDatabase
 import io.github.drinkfinder.database.Favourite
 import io.github.drinkfinder.database.Ingredient
+import java.util.*
 
 class DrinkViewActivity : DrinkFinderSecondaryActivity() {
 
@@ -40,8 +42,13 @@ class DrinkViewActivity : DrinkFinderSecondaryActivity() {
             isAlcoholicImage.setImageResource(R.drawable.drink_icon_alcoholic)
         }
 
-        // if drink image not found set the default one
-        findViewById<ImageView>(R.id.drink_image).setImageResource(R.drawable.default_drink)
+        val drinkImageId = applicationContext.resources.getIdentifier(
+            getImageName(selectedDrink.drink.name),
+            "drawable",
+            packageName
+        )
+
+        findViewById<ShapeableImageView>(R.id.drink_image).setImageResource(if (drinkImageId != 0) drinkImageId else R.drawable.default_drink)
         findViewById<TextView>(R.id.drink_ingredients).text =
             listAllIngredients(selectedDrink.ingredients)
         findViewById<TextView>(R.id.drink_instructions).text =
@@ -72,6 +79,14 @@ class DrinkViewActivity : DrinkFinderSecondaryActivity() {
                 true
             }
         }
+    }
+
+    private fun getImageName(drinkName: String): String {
+        val imageName =
+            if (drinkName[0].isDigit())
+                "_" + drinkName.subSequence(1, drinkName.length) else drinkName
+
+        return imageName.replace(Regex("[ #-/]"), "_").lowercase(Locale.ROOT)
     }
 
     private fun listAllIngredients(ingredients: List<Ingredient>): String {

@@ -21,7 +21,6 @@ data class Drink(
 
 @Entity(
     tableName = "drinks_ingredients",
-    primaryKeys = ["drinkId", "ingredientId"],
     foreignKeys = [
         ForeignKey(
             entity = Drink::class,
@@ -38,8 +37,10 @@ data class Drink(
     ]
 )
 data class DrinksIngredients(
+    @PrimaryKey val drinksIngredientsId: Int,
     val drinkId: Int,
-    val ingredientId: Int
+    val ingredientId: Int,
+    val ingredientMeasure: String
 )
 
 data class DrinkWithIngredients(
