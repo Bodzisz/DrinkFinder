@@ -13,4 +13,5 @@
     <string name="find_drink_by_name">Find drink by name</string>
     <string name="favourite_drinks">Favourite drinks</string>
     <string name="clear">Clear</string>
+    <string name="show_selected_ingredients_option">Show selected ingredients</string>
 </resources>

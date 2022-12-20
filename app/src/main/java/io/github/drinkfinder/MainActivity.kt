@@ -2,6 +2,7 @@ package io.github.drinkfinder
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -45,6 +46,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.show_selected_ingredients_option -> {
+                startActivityWithSelctedIngredients(ShowSelectedIngredientsActivity::class.java)
+            }
+        }
         if (toggle.onOptionsItemSelected(item)) {
             return true
         }
@@ -129,12 +135,7 @@ class MainActivity : AppCompatActivity() {
     private fun initSearchButton() {
         val searchButton = findViewById<Button>(R.id.search_button)
         searchButton.setOnClickListener {
-            val intent = Intent(this, SelectedIngredientsDrinkListActivity::class.java)
-            intent.putCharSequenceArrayListExtra(
-                "selectedIngredientsNames",
-                getSelectedIngredientsNames()
-            )
-            startActivity(intent)
+            startActivityWithSelctedIngredients(SelectedIngredientsDrinkListActivity::class.java)
         }
     }
 
@@ -166,5 +167,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun clearIngredientState(listIngredientDataModel: ListIngredientDataModel) {
         listIngredientDataModel.checked = false
+    }
+
+    private fun startActivityWithSelctedIngredients(activityClass: Class<*>?) {
+        val intent = Intent(this, activityClass)
+        intent.putCharSequenceArrayListExtra(
+            "selectedIngredientsNames",
+            getSelectedIngredientsNames()
+        )
+        startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.dots_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
