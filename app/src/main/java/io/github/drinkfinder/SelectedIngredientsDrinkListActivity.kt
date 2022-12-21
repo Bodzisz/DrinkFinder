@@ -1,5 +1,6 @@
 package io.github.drinkfinder
 
+import android.widget.Toast
 import io.github.drinkfinder.database.DrinkDatabase
 
 class SelectedIngredientsDrinkListActivity : DrinkListActivity() {
@@ -17,6 +18,11 @@ class SelectedIngredientsDrinkListActivity : DrinkListActivity() {
         } else {
             DrinkDatabase.getInstance(applicationContext).drinkDao()
                 .getAllNamesByIngredients(ingredientsNames)
+        }
+        if (drinksList.isEmpty()) {
+            Toast.makeText(applicationContext,
+                "0 drinks containing those ingredients found!",
+                Toast.LENGTH_LONG).show()
         }
     }
 
