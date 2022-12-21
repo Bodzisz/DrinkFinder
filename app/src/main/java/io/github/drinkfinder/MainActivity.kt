@@ -113,6 +113,7 @@ class MainActivity : AppCompatActivity() {
                     if (!this::class.simpleName.equals("MainActivity")) switchScreens(MainActivity::class.java)
                 R.id.select_by_name -> switchScreens(SelectedByNameDrinkListActivity::class.java)
                 R.id.favourite_drinks -> switchScreens(FavouriteDrinkListActivity::class.java)
+                R.id.about -> switchScreens(AboutActivity::class.java)
             }
             true
         }

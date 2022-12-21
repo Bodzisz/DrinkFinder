@@ -15,5 +15,5 @@
     <string name="clear">Clear</string>
     <string name="show_selected_ingredients_option">Show selected ingredients</string>
     <string name="about">About</string>
-    <string name="abouttext">This application has been made for Android course in Wroclaw University of Science and Technology.</string>
+    <string name="abouttext">This application has been made for Android course in Wroclaw University of Science and Technology.\nApp has been made with the use of: https://www.thecocktaildb.com\n\nAuthors:\nMichał Kaźmierczak\nKacper Wójcicki\nJan Skibińki</string>
 </resources>
