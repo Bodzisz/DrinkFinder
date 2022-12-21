@@ -14,4 +14,6 @@
     <string name="favourite_drinks">Favourite drinks</string>
     <string name="clear">Clear</string>
     <string name="show_selected_ingredients_option">Show selected ingredients</string>
+    <string name="about">About</string>
+    <string name="abouttext">This application has been made for Android course in Wroclaw University of Science and Technology.</string>
 </resources>
