@@ -30,7 +30,7 @@ class IngredientDaoTest {
     }
 
     @Test
-    fun shouldReadAllIngredientNamesFromDatabase() {
+    fun shouldReadAllIngredientsNamesFromDatabase() {
         db.openHelper.writableDatabase.execSQL(
             "INSERT INTO ingredients VALUES(?, ?, ?, ?, ?)",
             arrayOf(1, "ingredient", "description", 0, 0)
