@@ -10,8 +10,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class DatabaseTest {
-    private lateinit var drinkDao: DrinkDao
+class IngredientDaoTest {
+    private lateinit var ingredientDao: IngredientDao
     private lateinit var db: DrinkDatabase
 
     @Before
@@ -21,7 +21,7 @@ class DatabaseTest {
             context, DrinkDatabase::class.java
         ).build()
 
-        drinkDao = db.drinkDao()
+        ingredientDao = db.ingredientDao()
     }
 
     @After
