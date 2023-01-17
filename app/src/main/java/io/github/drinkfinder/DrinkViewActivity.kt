@@ -1,5 +1,7 @@
 package io.github.drinkfinder
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -9,7 +11,6 @@ import io.github.drinkfinder.database.DrinkDatabase
 import io.github.drinkfinder.database.Favourite
 import io.github.drinkfinder.database.IngredientWithQuantity
 import java.util.*
-
 class DrinkViewActivity : DrinkFinderSecondaryActivity() {
 
     private var isFavourite = false
@@ -18,6 +19,7 @@ class DrinkViewActivity : DrinkFinderSecondaryActivity() {
         const val ALCOHOLIC_TEXT = "alcoholic"
         const val NON_ALCOHOLIC_TEXT = "non-$ALCOHOLIC_TEXT"
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +45,7 @@ class DrinkViewActivity : DrinkFinderSecondaryActivity() {
         }
 
         val drinkImageId = applicationContext.resources.getIdentifier(
-            getImageName(selectedDrink.drink.name),
+            UtilityFunctions.getImageName(selectedDrink.drink.name),
             "drawable",
             packageName
         )
@@ -53,10 +55,11 @@ class DrinkViewActivity : DrinkFinderSecondaryActivity() {
         )
 
         findViewById<TextView>(R.id.drink_ingredients).text =
-            listAllIngredients(selectedDrink.ingredientsWithQuantity)
-        
+            UtilityFunctions.listAllIngredients(selectedDrink.ingredientsWithQuantity)
+
+        print(findViewById<TextView>(R.id.drink_ingredients).text)
         findViewById<TextView>(R.id.drink_instructions).text =
-            adjustInstruction(selectedDrink.drink.instructions)
+            UtilityFunctions.adjustInstruction(selectedDrink.drink.instructions)
 
         val drinkName = findViewById<TextView>(R.id.drink_name)
         drinkName.text = selectedDrink.drink.name
@@ -85,33 +88,4 @@ class DrinkViewActivity : DrinkFinderSecondaryActivity() {
         }
     }
 
-    private fun getImageName(drinkName: String): String {
-        val imageName =
-            if (drinkName[0].isDigit())
-                "_" + drinkName.subSequence(1, drinkName.length) else drinkName
-
-        return imageName.replace(Regex("[ #-/]"), "_").lowercase(Locale.ROOT)
-    }
-
-    private fun listAllIngredients(ingredients: List<IngredientWithQuantity>): String {
-        var result = ""
-
-        for (i in ingredients) {
-            result = concatNextItem(
-                result,
-                "${i.drinksIngredient.ingredientMeasure} ${i.ingredient.name}"
-            )
-        }
-
-        return result
-    }
-
-    private fun concatNextItem(stringToConcat: String, item: String): String {
-        val newLine = if (stringToConcat.isEmpty()) "" else "\n"
-        return "$stringToConcat$newLine- $item"
-    }
-
-    private fun adjustInstruction(instruction: String?): String {
-        return instruction?.replace(Regex("(\\. )|(: )"), "\n") ?: ""
-    }
 }
