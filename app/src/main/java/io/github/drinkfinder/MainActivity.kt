@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAllIngredientsSwitch(navView: NavigationView) {
-        val menuItem = navView.menu.findItem(R.id.item4)
+        val menuItem = navView.menu.findItem(R.id.allIngredientsSwitch)
         val switchId = menuItem.actionView.findViewById(R.id.switch_id) as SwitchCompat
         val preferences = getSharedPreferences("Preferences", MODE_PRIVATE)
         switchId.isChecked = preferences.getBoolean("allIngredients", false)
