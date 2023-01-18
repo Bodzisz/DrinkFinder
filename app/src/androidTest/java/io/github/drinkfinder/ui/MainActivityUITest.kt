@@ -122,31 +122,40 @@ class MainActivityUITest {
 
         onView(withId(R.id.ingredientSearch))
             .perform(click())
-            .perform(typeText("absol"))
+            .perform(typeText("absolut"))
 
         onData(anything())
             .inAdapterView(withId(R.id.listview_1))
             .atPosition(0)
-            .onChildView(withId(R.id.ingredientName))
-            .check(matches(withText("Absolut Kurant")))
+            .perform(click())
 
         onData(anything())
             .inAdapterView(withId(R.id.listview_1))
             .atPosition(1)
-            .onChildView(withId(R.id.ingredientName))
-            .check(matches(withText("Absolut Peppar")))
+            .perform(click())
 
         onData(anything())
             .inAdapterView(withId(R.id.listview_1))
             .atPosition(2)
-            .onChildView(withId(R.id.ingredientName))
-            .check(matches(withText("Absolut Vodka")))
+            .perform(click())
 
         onData(anything())
             .inAdapterView(withId(R.id.listview_1))
             .atPosition(3)
-            .onChildView(withId(R.id.ingredientName))
-            .check(matches(withText("Absolut citron")))
+            .perform(click())
+
+        onView(withId(R.id.overflowMenu))
+            .perform(click())
+
+        onView(withText(R.string.show_selected_ingredients_option))
+            .perform(click())
+
+        intended(hasExtra(equalTo("selectedIngredientsNames"), allOf(
+            hasItem(equalTo("Absolut Kurant")),
+            hasItem(equalTo("Absolut Peppar")),
+            hasItem(equalTo("Absolut Vodka")),
+            hasItem(equalTo("Absolut citron"))
+        )))
     }
 
     @Test
